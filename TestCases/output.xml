@@ -1,52 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 6.0.1 (Python 3.11.0 on win32)" generated="20221115 17:35:54.994" rpa="false" schemaversion="3">
-<suite id="s1" name="TC 004 DeleteRequest" source="C:\Users\P0107074\PycharmProjects\robotFrameWorkPracticeBeginner\TestCases\TC_004_DeleteRequest.robot">
-<test id="s1-t1" name="TC_004 Validate Delete Request" line="10">
+<robot generator="Robot 6.0.1 (Python 3.11.0 on win32)" generated="20221115 18:24:22.502" rpa="false" schemaversion="3">
+<suite id="s1" name="TC 006 PostRequest ValidateResponse" source="C:\Users\P0107074\PycharmProjects\robotFrameWorkPracticeBeginner\TestCases\TC_006_PostRequest_ValidateResponse.robot">
+<test id="s1-t1" name="TC_006 Create new user" line="10">
 <kw name="Create Session" library="RequestsLibrary">
-<arg>AppAccess</arg>
+<arg>CreateUser</arg>
 <arg>${base_url}</arg>
 <doc>Create Session: create a HTTP session to a server</doc>
-<msg timestamp="20221115 17:35:55.531" level="INFO">Creating Session using : alias=AppAccess, url=http://thetestingworldapi.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<status status="PASS" starttime="20221115 17:35:55.531" endtime="20221115 17:35:55.532"/>
+<msg timestamp="20221115 18:24:23.020" level="INFO">Creating Session using : alias=CreateUser, url=https://reqres.in/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20221115 18:24:23.019" endtime="20221115 18:24:23.020"/>
 </kw>
-<kw name="DELETE On Session" library="RequestsLibrary">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{body}</var>
+<arg>name=morpheus</arg>
+<arg>job=leader</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20221115 18:24:23.021" level="INFO">&amp;{body} = { name=morpheus | job=leader }</msg>
+<status status="PASS" starttime="20221115 18:24:23.020" endtime="20221115 18:24:23.021"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${body}</var>
+<arg>json.dumps(${body})</arg>
+<arg>json</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20221115 18:24:23.022" level="INFO">${body} = {"name": "morpheus", "job": "leader"}</msg>
+<status status="PASS" starttime="20221115 18:24:23.021" endtime="20221115 18:24:23.022"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{header}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20221115 18:24:23.022" level="INFO">&amp;{header} = { Content-Type=application/json }</msg>
+<status status="PASS" starttime="20221115 18:24:23.022" endtime="20221115 18:24:23.022"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
 <var>${response}</var>
-<arg>AppAccess</arg>
-<arg>/api/studentsDetails/32</arg>
-<doc>Sends a DELETE request on a previously created HTTP Session.</doc>
-<msg timestamp="20221115 17:35:56.412" level="INFO">DELETE Request : url=http://thetestingworldapi.com/api/studentsDetails/32 (redirected) 
- path_url=/api/studentsDetails/32 
- headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
- body=None 
+<arg>CreateUser</arg>
+<arg>api/users</arg>
+<arg>data=${body}</arg>
+<arg>headers=${header}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20221115 18:24:23.701" level="INFO">POST Request : url=https://reqres.in/api/users 
+ path_url=/api/users 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '37'} 
+ body={"name": "morpheus", "job": "leader"} 
  </msg>
-<msg timestamp="20221115 17:35:56.412" level="INFO">DELETE Response : url=https://thetestingworldapi.com/api/studentsDetails/32 
- status=200, reason=OK 
- headers={'Cache-Control': 'no-cache', 'Pragma': 'no-cache', 'Content-Type': 'application/json; charset=utf-8', 'Expires': '-1', 'Server': 'Microsoft-IIS/8.5', 'X-AspNet-Version': '4.0.30319', 'X-Powered-By': 'ASP.NET', 'X-Powered-By-Plesk': 'PleskWin', 'Date': 'Tue, 15 Nov 2022 09:36:03 GMT', 'Content-Length': '43'} 
- body={"status":"false","msg":"record not found"} 
+<msg timestamp="20221115 18:24:23.701" level="INFO">POST Response : url=https://reqres.in/api/users 
+ status=201, reason=Created 
+ headers={'Date': 'Tue, 15 Nov 2022 10:24:31 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '84', 'Connection': 'keep-alive', 'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Etag': 'W/"54-4V+0ziKp0B8G9yDWHfiMfdX1qOg"', 'Via': '1.1 vegur', 'CF-Cache-Status': 'DYNAMIC', 'Report-To': '{"endpoints":[{"url":"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=rTppNELojz7IW8qm2xHI5Xxb1OUzbYL6QtbxpJjPikf5DsHg3CKyi8Yr%2Fq88daNOU1oXgvNPpcHBupFWZVWQ5URPR0PJyXo4OyX%2FV56spbPnz2QamQjkjL4NAUwLTqdgbcpNIhLx6A%3D%3D"}],"group":"cf-nel","max_age":604800}', 'NEL': '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}', 'Server': 'cloudflare', 'CF-RAY': '76a747118d274b56-SIN'} 
+ body={"name":"morpheus","job":"leader","id":"148","createdAt":"2022-11-15T10:24:31.247Z"} 
  </msg>
-<msg timestamp="20221115 17:35:56.412" level="INFO">C:\Users\P0107074\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py:1045: InsecureRequestWarning: Unverified HTTPS request is being made to host 'thetestingworldapi.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/1.26.x/advanced-usage.html#ssl-warnings
+<msg timestamp="20221115 18:24:23.701" level="INFO">C:\Users\P0107074\AppData\Local\Programs\Python\Python311\Lib\site-packages\urllib3\connectionpool.py:1045: InsecureRequestWarning: Unverified HTTPS request is being made to host 'reqres.in'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/1.26.x/advanced-usage.html#ssl-warnings
   warnings.warn(</msg>
-<msg timestamp="20221115 17:35:56.418" level="INFO">${response} = &lt;Response [200]&gt;</msg>
-<status status="PASS" starttime="20221115 17:35:55.534" endtime="20221115 17:35:56.419"/>
+<msg timestamp="20221115 18:24:23.702" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<status status="PASS" starttime="20221115 18:24:23.024" endtime="20221115 18:24:23.702"/>
 </kw>
 <kw name="Should Be Equal As Strings" library="BuiltIn">
 <arg>${response.status_code}</arg>
-<arg>200</arg>
+<arg>201</arg>
 <doc>Fails if objects are unequal after converting them to strings.</doc>
-<msg timestamp="20221115 17:35:56.422" level="INFO">Argument types are:
+<msg timestamp="20221115 18:24:23.703" level="INFO">Argument types are:
 &lt;class 'int'&gt;
 &lt;class 'str'&gt;</msg>
-<status status="PASS" starttime="20221115 17:35:56.420" endtime="20221115 17:35:56.422"/>
+<status status="PASS" starttime="20221115 18:24:23.702" endtime="20221115 18:24:23.703"/>
 </kw>
-<kw name="Should Be Equal" library="BuiltIn">
-<arg>${response.json()}[status]</arg>
-<arg>false</arg>
-<doc>Fails if the given objects are unequal.</doc>
-<status status="PASS" starttime="20221115 17:35:56.423" endtime="20221115 17:35:56.424"/>
-</kw>
-<status status="PASS" starttime="20221115 17:35:55.530" endtime="20221115 17:35:56.424"/>
+<status status="PASS" starttime="20221115 18:24:23.019" endtime="20221115 18:24:23.703"/>
 </test>
-<status status="PASS" starttime="20221115 17:35:55.003" endtime="20221115 17:35:56.426"/>
+<status status="PASS" starttime="20221115 18:24:22.508" endtime="20221115 18:24:23.704"/>
 </suite>
 <statistics>
 <total>
@@ -55,7 +74,7 @@
 <tag>
 </tag>
 <suite>
-<stat pass="1" fail="0" skip="0" id="s1" name="TC 004 DeleteRequest">TC 004 DeleteRequest</stat>
+<stat pass="1" fail="0" skip="0" id="s1" name="TC 006 PostRequest ValidateResponse">TC 006 PostRequest ValidateResponse</stat>
 </suite>
 </statistics>
 <errors>
