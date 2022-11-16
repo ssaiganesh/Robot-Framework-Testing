@@ -1,9 +1,10 @@
 *** Settings ***
 Library  RequestsLibrary
+Library  Collections
 
 *** Variables ***
 ${APP_BASE_URL}  http://thetestingworldapi.com/
-${StudentID}  28
+${StudentID}  3937251
 
 
 *** Test Cases ***
@@ -19,4 +20,13 @@ TC_003_Fetch_Student_Details_By_ID
 #    should be equal  ${actual_code}  200
 
     should be equal as strings  ${Response.status_code}  200
-    should be equal  ${Response.json()}[status]  false
+    should be equal  ${Response.json()}[status]  true
+
+    # ${body}=  ${Response.content} # keyword name cannot be empty error so have to convert to string as below
+    ${body}=  convert to string  ${Response.content}
+    should contain  ${body}  3937251
+
+    ${contentTypeValue}=  get from dictionary  ${Response.headers}  Content-Type
+    log to console  contentTypeValue
+    should be equal  ${contentTypeValue}  application/json; charset=utf-8
+

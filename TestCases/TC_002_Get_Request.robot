@@ -11,3 +11,4 @@ TC_002_Get_Request
     ${response}=    GET On Session  Get_Student_Details  api/studentsDetails
     log to console  ${response.status_code} # log to console ${response}
     log to console  ${response.content}
+    log to console  ${response.headers}

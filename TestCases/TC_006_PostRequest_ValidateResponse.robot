@@ -9,9 +9,9 @@ ${base_url}  https://reqres.in/
 *** Test Cases ***
 TC_006 Create new user
     create session  CreateUser  ${base_url}
-    &{body}=  create dictionary  name=morpheus  job=leader
+    ${body}=  create dictionary  name=morpheus  job=leader
     ${body}  evaluate  json.dumps(${body})  json
-    &{header}=  create dictionary  Content-Type=application/json
+    ${header}=  create dictionary  Content-Type=application/json
 
     ${response}=  POST On Session  CreateUser  api/users  data=${body}  headers=${header}
     should be equal as strings  ${response.status_code}  201
