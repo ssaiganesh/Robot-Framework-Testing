@@ -21,6 +21,8 @@ Validate Cards display in the Shopping Page
     Verify Card Titles in the Shop Page
     Select the Card     Blackberry
 
+Validate Sucessful Login
+    Fill the Login Form and Click the User Option
 
 *** Keywords ***
 fill the login form
@@ -59,3 +61,14 @@ Select the Card
         ${index}=   Evaluate     ${index} + 1
     END
     Click Button    xpath:(//*[@class='card-footer'])[${index}]/button
+
+
+Fill the Login Form and Click the User Option
+    Input Text    id:username    ${user_name}
+    Input Password    id:password    ${valid_password}
+    Click Element       css:input[value='user']
+    Wait Until Element Is Visible    css:.modal-body
+    Click Button    id:okayBtn   # in video he repeated this line 2 times, because it didn;t work for him once
+    Select From List By Value    css:select.form-control    teach
+    Select Checkbox    terms
+    Checkbox Should Be Selected    terms

@@ -10,6 +10,9 @@ ${base_url}  https://reqres.in/
 TC_006 Create new user
     create session  CreateUser  ${base_url}
     ${body}=  create dictionary  name=morpheus  job=leader
+    Dictionary Should Contain Key    ${body}    name
+    Log    ${body}[name]
+    ${name_variable}=    Get From Dictionary    ${body}    name
     ${body}  evaluate  json.dumps(${body})  json
     ${header}=  create dictionary  Content-Type=application/json
 
