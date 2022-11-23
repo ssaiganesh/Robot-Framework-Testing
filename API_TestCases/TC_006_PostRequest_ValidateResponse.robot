@@ -19,6 +19,13 @@ TC_006 Create new user
     ${response}=  POST On Session  CreateUser  api/users  data=${body}  headers=${header}
     should be equal as strings  ${response.status_code}  201
 
+
+*** Keywords ***
+TC_006 Create New User Template
+
+
+
+
 #How to pass the data for this element?
 
 

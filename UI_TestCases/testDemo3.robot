@@ -18,13 +18,6 @@ Validate Unsuccessful Login
     username=rahulshetty     password=ploudfg
     username=%#$#%@          password=learning
 
-*** Keywords ***
-Validate Unsuccessful Login Template
-    [Arguments]             ${username}     ${password}
-    fill the login form     ${username}    ${password}
-    Wait Until Element Is Visible    ${Error_Message_Login}
-    verify error message is correct
-
 Validate Cards display in the Shopping Page
     fill the login form     ${user_name}    ${valid_password}
     Wait Until Element Is Visible    ${Shop_Page_Load}
@@ -40,9 +33,13 @@ Validate Child Window Functionality
     Grab the Email id in the Child Window
     Switch to Parent window and enter the Email
 
-
-
 *** Keywords ***
+Validate Unsuccessful Login Template
+    [Arguments]             ${username}     ${password}
+    fill the login form     ${username}    ${password}
+    Wait Until Element Is Visible    ${Error_Message_Login}
+    verify error message is correct
+
 fill the login form
     [Arguments]     ${username}     ${password}
     Input Text    id:username    ${username}
