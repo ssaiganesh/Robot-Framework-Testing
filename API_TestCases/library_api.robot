@@ -10,6 +10,8 @@ ${book_name}    RobotFramework
 
 *** Test Cases ***
 Add Book into Library Database
+    [Documentation]     This will add a book to the database
+    ...                 We are Expecting a BOOK ID to be created and saved to global variable
 
     &{req_body}=    Create Dictionary    name=${book_name}    isbn=98453      aisle=2342423   author=SaiGanesh
     ${response}=  POST      ${base_url}/Library/Addbook.php    json=${req_body}    expected_status=200

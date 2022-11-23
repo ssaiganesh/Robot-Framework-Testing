@@ -9,6 +9,7 @@ ${StudentID}  3937251
 
 *** Test Cases ***
 TC_003_Fetch_Student_Details_By_ID
+    [Tags]  testTag
     create session  FetchData  ${APP_BASE_URL}
     ${Response}=  GET On Session  FetchData  api/studentsDetails/${StudentID}
     log to console  ${Response.status_code}

@@ -6,19 +6,20 @@ Library    String
 Test Setup    open the browser with the Mortgage payment url
 #Test Teardown       Sleep    20
 Resource    resource.robot
-Test Template       Validate Unsuccessful Login
 
 *** Variables ***
 ${Error_Message_Login}      css:.alert-danger
 ${Shop_Page_Load}      class:nav-link   # can also use css:.nav-link
 
-*** Test Cases ***      username        password
-Invalid username        dsahed          learning
-Invalid password        rahulshetty     ploudfg
-special characters      %#$#%@           learning
+*** Test Cases ***
+Validate Unsuccessful Login
+    [Template]              Validate Unsuccessful Login Template
+    username=dsahed          password=learning
+    username=rahulshetty     password=ploudfg
+    username=%#$#%@          password=learning
 
 *** Keywords ***
-Validate Unsuccessful Login
+Validate Unsuccessful Login Template
     [Arguments]             ${username}     ${password}
     fill the login form     ${username}    ${password}
     Wait Until Element Is Visible    ${Error_Message_Login}

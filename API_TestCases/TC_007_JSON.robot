@@ -6,7 +6,7 @@ Library  Collections
 
 *** Test Cases ***
 Testcase 1:
-    ${json_obj}=  load json from file  C:/Test/jsondata.json
+    ${json_obj}=  load json from file  ${CURDIR}${/}jsonFiles/jsondata.json
     # how to get current directory to get file
 
     ${name_value}=  get value from json  ${json_obj}  $.firstName
