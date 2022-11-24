@@ -7,9 +7,6 @@ Library  JSONLibrary
 *** Variables ***
 ${base_url}     https://simple-books-api.glitch.me
 
-
-
-
 *** Test Cases ***
 Status 200 and should be OK
     create session  checkstatus  ${base_url}
